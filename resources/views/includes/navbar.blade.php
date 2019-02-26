@@ -19,6 +19,12 @@
             </a>
         </li>
 
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ route('user.create') }}"> Add User
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="#"> Departments
                 <span class="sr-only"> </span>

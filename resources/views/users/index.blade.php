@@ -7,12 +7,14 @@
 @endsection
 
 @section('content')
-
+<br>
 <a  href="{{ route('user.create') }}"
     class="btn btn-primary btn-lg active"
     role="button" aria-pressed="true">
         Create User
 </a>
+<br>
+<br>
 <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>

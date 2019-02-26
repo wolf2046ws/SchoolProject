@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
+use App\Company;
+use App\Resort;
 
 class userController extends Controller
 {
@@ -27,6 +30,12 @@ class userController extends Controller
     public function create()
     {
         //
+        $departments = Department::all();
+            $companies = Company::all();
+            $resorts = Resort::all();
+            $users = User::all();
+            return view('users.create', compact('departments', 'users',
+                'companies', 'resorts'));
     }
 
     /**
