@@ -31,12 +31,14 @@ class userDataValidation extends FormRequest
             'gender'=> 'required|in:male,female',
             'contract_start' => 'required',
             'contract_end' => 'required' ,
-
             'department_id' => 'required|exists:departments,id',
-
             'company_id' => 'required|exists:companies,id',
+            'resort_id' => 'required|exists:resorts,id',
+            "softwares"    => "required|array",
+            "softwares.*"  => "required|string|distinct|exists:software,id",
 
-            'resort_id' => 'required|exists:resorts,id'
+            "hardwares"    => "required|array",
+            "hardwares.*"  => "required|string|distinct|exists:hardware,id"
         ];
     }
 

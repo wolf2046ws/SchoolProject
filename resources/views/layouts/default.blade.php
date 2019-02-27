@@ -12,6 +12,7 @@
             </header>
 
             <div>
+                @include('includes.messages')
                 @yield('content')
             </div>
 

@@ -7,6 +7,10 @@ use App\User;
 use App\Department;
 use App\Company;
 use App\Resort;
+use App\Hardware;
+use App\Software;
+use App\ComponentRequest;
+
 //use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\userDataValidation;
 
@@ -20,7 +24,7 @@ class userController extends Controller
     public function index()
     {
         //
-        $users = User::latest()->paginate(10);
+        $users = User::latest()->get();
         return view('users.index', compact('users'));
     }
 
@@ -36,9 +40,11 @@ class userController extends Controller
         $companies = Company::all();
         $resorts = Resort::all();
         $users = User::all();
+        $softwares = Software::all();
+        $hardwares = Hardware::all();
 
         return view('users.create', compact('departments', 'users',
-                'companies', 'resorts'));
+                'companies', 'resorts', 'softwares', 'hardwares'));
     }
 
     /**
@@ -49,9 +55,27 @@ class userController extends Controller
      */
     public function store(userDataValidation $request)
     {
-
        //store to data base
        $user = User::create($request->all());
+       foreach ($request->softwares as $software => $value) {
+           $component_request = new ComponentRequest();
+           $component_request->user_id =  $user->id;
+           $component_request->status = "pending" ;
+           $component_request->component_type = "Software" ;
+           $component_request->component_id = $value;
+           $component_request->save();
+
+       }
+
+       foreach ($request->hardwares as $hardware => $value) {
+           $component_request = new ComponentRequest();
+           $component_request->user_id =  $user->id;
+           $component_request->status = "pending" ;
+           $component_request->component_type = "Hardware" ;
+           $component_request->component_id = $value;
+           $component_request->save();
+
+       }
        session()->flash('success','User Added Successfully');
        return redirect(route('user.index'));
 
@@ -65,7 +89,9 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('ahmed',$id);
+        //find or fail el users
+        //return to view users.show and $user
     }
 
     /**
@@ -77,6 +103,14 @@ class userController extends Controller
     public function edit($id)
     {
         //
+        $user = User::findOrFail($id);
+        $departments = Department::all();
+        $companies = Company::all();
+        $resorts = Resort::all();
+        $users = User::all();
+
+        return view('users.update', compact('departments', 'users',
+                'companies', 'resorts','user'));
     }
 
     /**
@@ -86,9 +120,17 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(userDataValidation $request, $id)
     {
-        //
+        //validation
+        //1-get user DataTable
+        //2-Update
+        //return true
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        session()->flash('success','User Updated Successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -99,6 +141,12 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        //User::destroy($id)
+        $user = User::findOrFail($id);
+        $user->delete();
+        session()->flash('success','User Deleted Successfully');
+        return redirect()->back();
+
     }
 }

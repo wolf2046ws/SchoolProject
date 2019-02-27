@@ -3,15 +3,7 @@
 
 @section('content')
 
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+
 
 <form method="POST" action="{{ route('user.store') }}">
     @csrf
@@ -34,7 +26,6 @@
             name="last_name"
             placeholder="Doe">
   </div>
-
 
   <div class="form-group">
     <label for="manager">Manager </label>
@@ -104,6 +95,27 @@
         @endforeach
       </select>
     </div>
+
+    <div class="form-group">
+        <label for="Select3">Select Software</label>
+        @foreach($softwares as $software)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="softwares[]" type="checkbox" id="inlineCheckbox1" value="{{$software->id}}">
+          <label class="form-check-label" for="inlineCheckbox1">{{$software->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
+        <label for="Select3">Select Hardware</label>
+        @foreach($hardwares as $hardware)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="hardwares[]" type="checkbox" id="inlineCheckbox1" value="{{$hardware->id}}">
+          <label class="form-check-label" for="inlineCheckbox1">{{$hardware->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
 
     <div class="form-group">
      <label >Contract Start</label>

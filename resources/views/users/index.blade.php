@@ -26,6 +26,7 @@
                 <th>Gender </th>
                 <th>Start date</th>
                 <th>End Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
@@ -40,6 +41,17 @@
                     <th> {{ $user->gender }} </th>
                     <th> {{ $user->contract_start }} </th>
                     <th> {{ $user->contract_end }} </th>
+                    <th>
+                        <ul>
+                            <li ><a href="{{ route('user.edit', $user->id ) }}">Edit</a></li>
+                            <form method="POST" action="{{ route('user.destroy', $user->id) }}">
+                                @csrf
+                                {{ method_field('DELETE') }}
+                            <li ><button type="submit">
+                                Delete</button></li>
+                        </form>
+                        </ul>
+                    </th>
                 </tr>
             @endforeach
         </tbody>
