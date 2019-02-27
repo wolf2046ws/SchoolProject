@@ -22,6 +22,7 @@
             class="form-control"
             id="firstName"
             name="first_name"
+            value = "{{old('first_name')}}"
             placeholder="John">
   </div>
 <br>
@@ -50,7 +51,8 @@
             type="radio"
             name="gender"
             id="Radios1"
-            value="male" checked>
+            @if(old('gender') == 'male') checked @endif
+            value="male" >
 
         <label class="form-check-label" for="Radios1">
           Male
@@ -63,6 +65,7 @@
             type="radio"
             name="gender"
             id="Radios2"
+            @if(old('gender') == 'female') checked @endif
             value="female">
 
         <label class="form-check-label" for="Radios2">
@@ -75,7 +78,8 @@
     <label for="Select1">Select Department</label>
     <select name ="department_id" class="form-control" id="Select1">
         @foreach($departments as $department)
-            <option value="{{ $department->id }}"> {{ $department->name }} </option>
+            <option @if(old('department_id') == $department->id ) selected @endif
+             value="{{ $department->id }}"> {{ $department->name }} </option>
       @endforeach
     </select>
   </div>
