@@ -7,6 +7,7 @@ use App\User;
 use App\Department;
 use App\Company;
 use App\Resort;
+use Illuminate\Support\Facades\Validator;
 
 class userController extends Controller
 {
@@ -31,10 +32,11 @@ class userController extends Controller
     {
         //
         $departments = Department::all();
-            $companies = Company::all();
-            $resorts = Resort::all();
-            $users = User::all();
-            return view('users.create', compact('departments', 'users',
+        $companies = Company::all();
+        $resorts = Resort::all();
+        $users = User::all();
+
+        return view('users.create', compact('departments', 'users',
                 'companies', 'resorts'));
     }
 
@@ -46,7 +48,40 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //validate
+        $v = Validator::make($request->all(), [
+
+        'first_name' => 'required|max:100',
+        'last_name' => 'required|max:100',
+        'gender'=> 'required|in:male,female',
+        'contract_start' => 'required',
+        'contract_end' => 'required' ,
+
+        'department_id' => 'required|exists:departments,id',
+        'department_id.exists' => 'Not an existing ID',
+
+        'company_id' => 'required|exists:companies,id',
+        'company_id.exists' => 'Not an existing ID',
+
+        'resort_id' => 'required|exists:resorts,id',
+        'resort_id.exists' => 'Not an existing ID'
+
+    ]);
+
+    if ($v->fails())
+       {
+           //dd($v->errors());
+           return redirect()->back()->withErrors($v->errors());
+       }
+
+
+       //store to data base
+       $user = User::create($request->all());
+       session()->flash('success','User Added Successfully');
+
+       return redirect(route('user.index'));
+
     }
 
     /**
