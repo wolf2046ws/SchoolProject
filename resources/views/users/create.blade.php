@@ -24,6 +24,7 @@
             class="form-control"
             id="lastName"
             name="last_name"
+            value = "{{old('last_name')}}"
             placeholder="Doe">
   </div>
 
@@ -33,6 +34,7 @@
             class="form-control"
             id="manager"
             name="manager"
+            value = "{{old('manager')}}"
             placeholder="Doe">
   </div>
 
@@ -119,12 +121,19 @@
 
     <div class="form-group">
      <label >Contract Start</label>
-     <input type="date" name="contract_start" max="3000-12-31"
-            min="1000-01-01" class="form-control">
+     <input type="date"
+            id="datepicker2"
+            name="contract_start"
+            min="1000-01-01"
+            max="3000-12-31"
+            class="form-control">
+
+
     </div>
     <div class="form-group">
      <label >Contract End</label>
-     <input type="date" name="contract_end" min="1000-01-01"
+     <input type="date" name="contract_end"
+            min="1000-01-01"
             max="3000-12-31" class="form-control">
     </div>
 
