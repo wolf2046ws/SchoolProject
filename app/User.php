@@ -50,15 +50,15 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
-    public function software(){
+    public function softwares(){
         return $this->hasMany(ComponentRequest::class)->where('component_type','Software');
     }
 
-    public function hardware(){
+    public function hardwares(){
         return $this->hasMany(ComponentRequest::class)->where('component_type','Hardware');
     }
 
-    public function file(){
+    public function files(){
         return $this->hasMany(ComponentRequest::class)->where('component_type','Files');
     }
 

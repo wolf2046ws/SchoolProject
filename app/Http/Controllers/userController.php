@@ -119,7 +119,7 @@ class userController extends Controller
         //return true
         $user = User::findOrFail($id);
         $user->update($request->all());
-        ComponentRequest::where('user_id',$user->id)->delete();
+        ComponentRequest::where('user_id',$user->id)->where('status','=','pending')->delete();
         $this->add_user_component($request,$user->id);
         session()->flash('success','User Updated Successfully');
 
@@ -169,7 +169,7 @@ class userController extends Controller
         foreach ($request->access_files as $file => $value) {
             $component_request = new ComponentRequest();
             $component_request->user_id =  $id;
-            $component_request->status = "Not Allowed" ;
+            $component_request->status = "pending" ;
             $component_request->component_type = "Files" ;
             $component_request->component_id = $value;
             $component_request->save();
@@ -177,5 +177,16 @@ class userController extends Controller
         }
 
         return true;
+    }
+
+    public function updateComponents(Request $request,$id){
+        //dd($request->all(),$id);
+        $components = ComponentRequest::whereIn('id',$request->components)->get();
+        foreach ($components as $component => $value) {
+            $value->status = 'delevired';
+            $value->update();
+        }
+        session()->flash('success','User Compoenent Updated Successfully');
+        return redirect()->back();
     }
 }

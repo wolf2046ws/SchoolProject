@@ -106,37 +106,65 @@
     <div class="form-group">
         <label for="Select3">Select Software</label>
         @foreach($softwares as $software)
+        @if($user->softwares()->where('component_id','=',$software->id)->count() == 1 &&
+        $user->softwares()->where('component_id', $software->id)->first()->status == 'pending' )
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="softwares[]"
           type="checkbox" id="inlineCheckbox1"
           value="{{$software->id}}"
-          @if($user->software()->where('component_id','=',$software->id)->count() == 1 ) checked @endif>
+          @if($user->softwares()->where('component_id','=',$software->id)->count() == 1) checked @endif>
           <label class="form-check-label" for="inlineCheckbox1">{{$software->name}}</label>
         </div>
+        @elseif($user->softwares()->where('component_id','=',$software->id)->count() == 0)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="softwares[]"
+          type="checkbox" id="inlineCheckbox1"
+          value="{{$software->id}}">
+          <label class="form-check-label" for="inlineCheckbox1">{{$software->name}}</label>
+        </div>
+        @endif
         @endforeach
     </div>
 
     <div class="form-group">
         <label for="Select3">Select Hardware</label>
         @foreach($hardwares as $hardware)
+        @if(($user->hardwares()->where('component_id','=',$hardware->id)->count() == 1) &&
+        ($user->hardwares()->where('component_id', $hardware->id)->first()->status == 'pending') )
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="hardwares[]" type="checkbox"
           id="inlineCheckbox1" value="{{$hardware->id}}"
-          @if($user->hardware()->where('component_id','=', $hardware->id)->count() == 1) checked @endif>
+          @if($user->hardwares()->where('component_id','=', $hardware->id)->count() == 1) checked @endif>
           <label class="form-check-label" for="inlineCheckbox1">{{$hardware->name}}</label>
         </div>
+        @elseif($user->hardwares()->where('component_id','=',$hardware->id)->count() == 0)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="hardwares[]" type="checkbox"
+          id="inlineCheckbox1" value="{{$hardware->id}}">
+            <label class="form-check-label" for="inlineCheckbox1">{{$hardware->name}}</label>
+        </div>
+        @endif
         @endforeach
     </div>
 
     <div class="form-group">
         <label for="Select3">Select File</label>
         @foreach($files as $file)
+        @if($user->files()->where('component_id','=',$file->id)->count() == 1 &&
+        $user->files()->where('component_id', $file->id)->first()->status == 'pending' )
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="access_files[]" type="checkbox"
           id="inlineCheckbox1" value="{{$file->id}}"
-          @if($user->file()->where('component_id','=', $file->id)->count() == 1) checked @endif>
+          @if($user->files()->where('component_id','=', $file->id)->count() == 1) checked @endif>
           <label class="form-check-label" for="inlineCheckbox1">{{$file->name}}</label>
         </div>
+        @elseif($user->files()->where('component_id','=',$file->id)->count() == 0)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="access_files[]" type="checkbox"
+          id="inlineCheckbox1" value="{{$file->id}}">
+            <label class="form-check-label" for="inlineCheckbox1">{{$file->name}}</label>
+        </div>
+        @endif
         @endforeach
     </div>
 

@@ -15,4 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/user-update-components/{id}','userController@updateComponents')->name('user.updateComponents');
 Route::resource('/user','userController');
