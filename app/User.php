@@ -58,4 +58,8 @@ class User extends Authenticatable
         return $this->hasMany(ComponentRequest::class)->where('component_type','Hardware');
     }
 
+    public function file(){
+        return $this->hasMany(ComponentRequest::class)->where('component_type','Files');
+    }
+
 }

@@ -120,6 +120,17 @@
 
 
     <div class="form-group">
+        <label for="Select3">Select Files</label>
+        @foreach($files as $file)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="access_files[]"
+          type="checkbox" id="inlineCheckbox1" value="{{$file->id}}">
+          <label class="form-check-label" for="inlineCheckbox1">{{$file->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
      <label >Contract Start</label>
      <input type="date"
             id="datepicker2"

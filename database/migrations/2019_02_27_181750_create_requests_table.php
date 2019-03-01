@@ -21,8 +21,8 @@ class CreateRequestsTable extends Migration
 
 
             $table->integer('component_id')->unsigned();
-            $table->enum('component_type',['Hardware', 'Software']);
-            $table->enum('status', ['pending', 'delevired']);
+            $table->enum('component_type',['Hardware', 'Software','Files']);
+            $table->enum('status', ['pending', 'delevired','Allowed','Not Allowed']);
             $table->timestamps();
         });
     }

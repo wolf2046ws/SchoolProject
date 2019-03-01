@@ -10,6 +10,7 @@ use App\Resort;
 use App\Hardware;
 use App\Software;
 use App\ComponentRequest;
+use App\AccessFile;
 
 //use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\userDataValidation;
@@ -42,9 +43,10 @@ class userController extends Controller
         $users = User::all();
         $softwares = Software::all();
         $hardwares = Hardware::all();
+        $files = AccessFile::all();
 
         return view('users.create', compact('departments', 'users',
-                'companies', 'resorts', 'softwares', 'hardwares'));
+                'companies', 'resorts', 'softwares', 'hardwares','files'));
     }
 
     /**
@@ -56,6 +58,7 @@ class userController extends Controller
     public function store(userDataValidation $request)
     {
        //store to data base
+
        $user = User::create($request->all());
        $this->add_user_component($request,$user->id);
        session()->flash('success','User Added Successfully');
@@ -71,7 +74,8 @@ class userController extends Controller
      */
     public function show($id)
     {
-        dd('ahmed',$id);
+        $user = User::findOrFail($id);
+        return view('users.show',compact('user'));
         //find or fail el users
         //return to view users.show and $user
     }
@@ -94,9 +98,10 @@ class userController extends Controller
         $users = User::all();
         $softwares = Software::all();
         $hardwares = Hardware::all();
+        $files = AccessFile::all();
 
         return view('users.update', compact('departments', 'users',
-                'companies', 'resorts','user', 'softwares', 'hardwares'));
+                'companies', 'resorts','user', 'softwares', 'hardwares','files'));
     }
 
     /**
@@ -133,6 +138,7 @@ class userController extends Controller
         //User::destroy($id)
         $user = User::findOrFail($id);
         $user->delete();
+        ComponentRequest::where('user_id',$id)->delete();
         session()->flash('success','User Deleted Successfully');
         return redirect()->back();
 
@@ -159,6 +165,17 @@ class userController extends Controller
             $component_request->save();
 
         }
+
+        foreach ($request->access_files as $file => $value) {
+            $component_request = new ComponentRequest();
+            $component_request->user_id =  $id;
+            $component_request->status = "Not Allowed" ;
+            $component_request->component_type = "Files" ;
+            $component_request->component_id = $value;
+            $component_request->save();
+
+        }
+
         return true;
     }
 }

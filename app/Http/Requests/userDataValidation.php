@@ -38,7 +38,11 @@ class userDataValidation extends FormRequest
             "softwares.*"  => "required|string|distinct|exists:software,id",
 
             "hardwares"    => "required|array",
-            "hardwares.*"  => "required|string|distinct|exists:hardware,id"
+            "hardwares.*"  => "required|string|distinct|exists:hardware,id",
+
+            "access_files"    => "required|array",
+            "access_files.*"  => "required|string|distinct|exists:access_files,id"
+
         ];
     }
 

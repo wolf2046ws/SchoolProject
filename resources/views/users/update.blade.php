@@ -129,6 +129,19 @@
     </div>
 
     <div class="form-group">
+        <label for="Select3">Select File</label>
+        @foreach($files as $file)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="access_files[]" type="checkbox"
+          id="inlineCheckbox1" value="{{$file->id}}"
+          @if($user->file()->where('component_id','=', $file->id)->count() == 1) checked @endif>
+          <label class="form-check-label" for="inlineCheckbox1">{{$file->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
+
+    <div class="form-group">
      <label >Contract Start</label>
      <input type="date" name="contract_start" max="3000-12-31"
             value="{{$user->contract_start}}"
