@@ -5,11 +5,11 @@
         </head>
     <body>
 
-        <div class="container">
+        <div class="container-fluid">
 
-            <header>
+
                 @include('includes.navbar')
-            </header>
+        
 
             <div>
                 @include('includes.messages')
