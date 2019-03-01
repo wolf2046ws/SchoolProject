@@ -50,5 +50,12 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     }
 
+    public function software(){
+        return $this->belongsTo(Software::class);
+    }
+
+    public function hardware(){
+        return $this->belongsTo(Hardware::class);
+    }
 
 }

@@ -104,6 +104,31 @@
     </div>
 
     <div class="form-group">
+        <label for="Select3">Select Software</label>
+        @foreach($softwares as $software)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="softwares[]"
+          type="checkbox" id="inlineCheckbox1"
+          value="{{$software->id}}"
+          @if( $user->software->id == $software->id ) checked @endif>
+          <label class="form-check-label" for="inlineCheckbox1">{{$software->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
+        <label for="Select3">Select Hardware</label>
+        @foreach($hardwares as $hardware)
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="hardwares[]" type="checkbox"
+          id="inlineCheckbox1" value="{{$hardware->id}}"
+          @if( $user->hardware->id == $hardware->id ) checked @endif>
+          <label class="form-check-label" for="inlineCheckbox1">{{$hardware->name}}</label>
+        </div>
+        @endforeach
+    </div>
+
+    <div class="form-group">
      <label >Contract Start</label>
      <input type="date" name="contract_start" max="3000-12-31"
             value="{{$user->contract_start}}"

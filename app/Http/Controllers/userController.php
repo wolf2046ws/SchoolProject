@@ -108,9 +108,11 @@ class userController extends Controller
         $companies = Company::all();
         $resorts = Resort::all();
         $users = User::all();
+        $softwares = Software::all();
+        $hardwares = Hardware::all();
 
         return view('users.update', compact('departments', 'users',
-                'companies', 'resorts','user'));
+                'companies', 'resorts','user', 'softwares', 'hardwares'));
     }
 
     /**
