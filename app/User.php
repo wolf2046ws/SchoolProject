@@ -51,11 +51,11 @@ class User extends Authenticatable
     }
 
     public function software(){
-        return $this->belongsTo(Software::class);
+        return $this->hasMany(ComponentRequest::class)->where('component_type','Software');
     }
 
     public function hardware(){
-        return $this->belongsTo(Hardware::class);
+        return $this->hasMany(ComponentRequest::class)->where('component_type','Hardware');
     }
 
 }

@@ -110,7 +110,7 @@
           <input class="form-check-input" name="softwares[]"
           type="checkbox" id="inlineCheckbox1"
           value="{{$software->id}}"
-          @if( $user->software->id == $software->id ) checked @endif>
+          @if($user->software()->where('component_id','=',$software->id)->count() == 1 ) checked @endif>
           <label class="form-check-label" for="inlineCheckbox1">{{$software->name}}</label>
         </div>
         @endforeach
@@ -122,7 +122,7 @@
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="hardwares[]" type="checkbox"
           id="inlineCheckbox1" value="{{$hardware->id}}"
-          @if( $user->hardware->id == $hardware->id ) checked @endif>
+          @if($user->hardware()->where('component_id','=', $hardware->id)->count() == 1) checked @endif>
           <label class="form-check-label" for="inlineCheckbox1">{{$hardware->name}}</label>
         </div>
         @endforeach

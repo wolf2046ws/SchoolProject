@@ -57,25 +57,7 @@ class userController extends Controller
     {
        //store to data base
        $user = User::create($request->all());
-       foreach ($request->softwares as $software => $value) {
-           $component_request = new ComponentRequest();
-           $component_request->user_id =  $user->id;
-           $component_request->status = "pending" ;
-           $component_request->component_type = "Software" ;
-           $component_request->component_id = $value;
-           $component_request->save();
-
-       }
-
-       foreach ($request->hardwares as $hardware => $value) {
-           $component_request = new ComponentRequest();
-           $component_request->user_id =  $user->id;
-           $component_request->status = "pending" ;
-           $component_request->component_type = "Hardware" ;
-           $component_request->component_id = $value;
-           $component_request->save();
-
-       }
+       $this->add_user_component($request,$user->id);
        session()->flash('success','User Added Successfully');
        return redirect(route('user.index'));
 
@@ -104,6 +86,8 @@ class userController extends Controller
     {
         //
         $user = User::findOrFail($id);
+
+    //    dd($user->software()->where('component_id','1')->count());
         $departments = Department::all();
         $companies = Company::all();
         $resorts = Resort::all();
@@ -130,6 +114,8 @@ class userController extends Controller
         //return true
         $user = User::findOrFail($id);
         $user->update($request->all());
+        ComponentRequest::where('user_id',$user->id)->delete();
+        $this->add_user_component($request,$user->id);
         session()->flash('success','User Updated Successfully');
 
         return redirect()->back();
@@ -150,5 +136,29 @@ class userController extends Controller
         session()->flash('success','User Deleted Successfully');
         return redirect()->back();
 
+    }
+
+
+    public function add_user_component($request,$id){
+        foreach ($request->softwares as $software => $value) {
+            $component_request = new ComponentRequest();
+            $component_request->user_id =  $id;
+            $component_request->status = "pending" ;
+            $component_request->component_type = "Software" ;
+            $component_request->component_id = $value;
+            $component_request->save();
+
+        }
+
+        foreach ($request->hardwares as $hardware => $value) {
+            $component_request = new ComponentRequest();
+            $component_request->user_id =  $id;
+            $component_request->status = "pending" ;
+            $component_request->component_type = "Hardware" ;
+            $component_request->component_id = $value;
+            $component_request->save();
+
+        }
+        return true;
     }
 }
