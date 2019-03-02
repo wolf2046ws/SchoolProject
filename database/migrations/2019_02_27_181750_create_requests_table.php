@@ -16,12 +16,11 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->Increments('id');
             $table->integer('user_id')->unsigned();
-
-
-
             $table->integer('component_id')->unsigned();
             $table->enum('component_type',['Hardware', 'Software','Files']);
             $table->enum('status', ['pending', 'delevired']);
+            $table->string('serial_number')->nullable();
+            $table->string('assets_id')->nullable();
             $table->timestamps();
         });
     }

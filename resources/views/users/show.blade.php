@@ -64,8 +64,11 @@
                   <input class="form-check-input" name="components[]" type="checkbox" id="inlineCheckbox1"
                  value="{{$hardware->id}}">
                   <label class="form-check-label" for="inlineCheckbox1"
-                  style="color: {{$hardware->status == 'delevired'? 'green' : 'red'}};">
+                  style="color: {{$hardware->status == 'delevired'? 'green' : 'red'}};width:100%;">
                       {{$hardware->hardware->name}}</label>
+                    <input type="text" name="assetsNumber[]" class="form-control" style="margin-left:50px; margin-right: 24px;" placeholder="Assets Id">
+                    <input type="text" name="serialNumber[]" class="form-control" placeholder="Serial ID">
+                    <br><br>
                 </div>
                 <br>
                 @endforeach
