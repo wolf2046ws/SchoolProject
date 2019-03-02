@@ -62,4 +62,13 @@ class User extends Authenticatable
         return $this->hasMany(ComponentRequest::class)->where('component_type','Files');
     }
 
+    /*public function delete(){
+        //delete requests
+        //delete posts
+        //delete DOMComme
+        //delete imagearc//
+        //delete the user
+        //$this->destroy();
+    }*/
+
 }

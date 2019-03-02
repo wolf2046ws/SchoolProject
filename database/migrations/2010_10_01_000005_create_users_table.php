@@ -25,16 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('manager');
 
             $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')
-                    ->references('id')->on('companies');
-
             $table->integer('resort_id')->unsigned();
-            $table->foreign('resort_id')
-                    ->references('id')->on('resorts');
-
             $table->integer('department_id')->unsigned();
-            $table->foreign('department_id')
-                    ->references('id')->on('departments');
 
             $table->timestamps();
         });

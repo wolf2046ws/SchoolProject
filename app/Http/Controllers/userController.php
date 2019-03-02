@@ -134,9 +134,12 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-
-        //User::destroy($id)
         $user = User::findOrFail($id);
+        if(ComponentRequest::where('user_id',$id)->where('status','delevired')->count() >= 1){
+            session()->flash('warning','User has Components pleas make sure to deactivated first');
+            return redirect()->back();
+        }
+        //User::destroy($id)
         $user->delete();
         ComponentRequest::where('user_id',$id)->delete();
         session()->flash('success','User Deleted Successfully');
@@ -183,7 +186,12 @@ class userController extends Controller
         //dd($request->all(),$id);
         $components = ComponentRequest::whereIn('id',$request->components)->get();
         foreach ($components as $component => $value) {
-            $value->status = 'delevired';
+            if($value->status == 'delevired'){
+                $value->status = 'pending';
+            }
+            else{
+                $value->status = 'delevired';
+            }
             $value->update();
         }
         session()->flash('success','User Compoenent Updated Successfully');

@@ -19,10 +19,6 @@ class CreateDepartmentResortsTable extends Migration
             $table->integer('department_id')->unsigned();
             $table->integer('resort_id')->unsigned();
 
-
-            $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('resort_id')->references('id')->on('resorts');
-
         });
     }
 

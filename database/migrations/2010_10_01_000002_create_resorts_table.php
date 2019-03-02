@@ -15,15 +15,9 @@ class CreateResortsTable extends Migration
     {
         Schema::create('resorts', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('location_id')->unsigned();
-            $table->foreign('location_id')
-                ->references('id')->on('locations');
-
-
             $table->integer('company_id')->unsigned();
-            $table->foreign('company_id')
-                ->references('id')->on('companies');
+
 
         });
     }
