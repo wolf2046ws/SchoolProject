@@ -13,6 +13,7 @@ class Software extends Model
 
 
     public function users(){
-        return $this->belongsToMany(User::class,'requests','component_id')->where('component_type','Software');
+        return $this->belongsToMany(User::class,'requests','component_id')
+        ->where('component_type','Software');
     }
 }

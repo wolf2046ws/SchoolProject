@@ -14,30 +14,22 @@ class HardwareDataSeeder extends Seeder
         //
         DB::table('hardware')->insert([
             'name' => "PC",
-            'model' => "Toshiba 520TM",
-            'serial_number' => "83056246",
-            'asset_id' => "000045"
+            'model' => "Toshiba 520TM"
         ]);
 
         DB::table('hardware')->insert([
             'name' => "Monitor",
-            'model' => "Pansonic 220/240 LCD",
-            'serial_number' => "54692562",
-            'asset_id' => "000012"
+            'model' => "Pansonic 220/240 LCD"
         ]);
 
         DB::table('hardware')->insert([
             'name' => "Mouse",
-            'model' => "LG 496-Speed",
-            'serial_number' => "3254914",
-            'asset_id' => "000013"
+            'model' => "LG 496-Speed"
         ]);
 
         DB::table('hardware')->insert([
             'name' => "Laptop",
-            'model' => "MAC Book Air",
-            'serial_number' => "756478",
-            'asset_id' => "000068"
+            'model' => "MAC Book Air"
         ]);
 
     }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Hardware;
+use App\Http\Requests\hardwareDataValidation;
+
 
 class hardwareController extends Controller
 {
@@ -14,6 +17,8 @@ class hardwareController extends Controller
     public function index()
     {
         //
+        $hardwares = Hardware::latest()->get();
+        return view('hardware.index', compact('hardwares'));
     }
 
     /**
@@ -24,6 +29,7 @@ class hardwareController extends Controller
     public function create()
     {
         //
+        return view('hardware.create');
     }
 
     /**
@@ -32,9 +38,12 @@ class hardwareController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(hardwareDataValidation $request)
     {
         //
+        Hardware::create($request->all());
+        session()->flash('success','Hardware Added Successfully');
+        return redirect(route('hardware.index'));
     }
 
     /**
@@ -57,6 +66,8 @@ class hardwareController extends Controller
     public function edit($id)
     {
         //
+        $hardware = Hardware::findOrFail($id);
+        return view('hardware.update', compact('hardware'));
     }
 
     /**
@@ -66,9 +77,13 @@ class hardwareController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(hardwareDataValidation $request, $id)
     {
         //
+        $hardware = Hardware::findOrFail($id);
+        $hardware->update($request->all());
+        session()->flash('success','Hardware Updated Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -80,5 +95,10 @@ class hardwareController extends Controller
     public function destroy($id)
     {
         //
+        $hardware = Hardware::findOrFail($id);
+        $hardware->delete();
+
+        session()->flash('success','Hardware Deleted Successfully');
+        return redirect()->back();
     }
 }

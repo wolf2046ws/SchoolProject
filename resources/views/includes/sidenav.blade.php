@@ -14,9 +14,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('hardware.index')}}">
           <span data-feather="shopping-cart"></span>
-          Products
+          Hardwares
         </a>
       </li>
       <li class="nav-item">
