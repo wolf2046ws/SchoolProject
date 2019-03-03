@@ -13,15 +13,15 @@ class CompanyDataSeeder extends Seeder
     {
         //
         DB::table('companies')->insert([
-            'name' => "Company A"
+            'name' => "Regenbogen AG"
         ]);
 
         DB::table('companies')->insert([
-            'name' => "Company B"
+            'name' => "Vosshall Marketing"
         ]);
 
         DB::table('companies')->insert([
-            'name' => "Company C"
+            'name' => "Tourist Concept"
         ]);
     }
 }

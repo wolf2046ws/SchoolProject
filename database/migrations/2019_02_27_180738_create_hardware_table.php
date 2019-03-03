@@ -16,6 +16,7 @@ class CreateHardwareTable extends Migration
         Schema::create('hardware', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('name');
+            $table->string('model');
             $table->timestamps();
         });
     }

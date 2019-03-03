@@ -13,15 +13,15 @@ class DepartmentDataSeeder extends Seeder
     {
         //
         DB::table('departments')->insert([
-            'name' => "Department A"
+            'name' => "IT"
         ]);
 
         DB::table('departments')->insert([
-            'name' => "Department B"
+            'name' => "Call Center"
         ]);
 
         DB::table('departments')->insert([
-            'name' => "Department C"
+            'name' => "Reception"
         ]);
     }
 }

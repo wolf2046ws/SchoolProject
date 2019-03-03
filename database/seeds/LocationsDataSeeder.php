@@ -13,15 +13,15 @@ class LocationsDataSeeder extends Seeder
     {
         //
         DB::table('locations')->insert([
-            'name' => "Location A"
+            'name' => "Boltenhagen"
         ]);
 
         DB::table('locations')->insert([
-            'name' => "Location B"
+            'name' => "Prerow"
         ]);
 
         DB::table('locations')->insert([
-            'name' => "Location C"
+            'name' => "Tecklenburg"
         ]);
 
     }

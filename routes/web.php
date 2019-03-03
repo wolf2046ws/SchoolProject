@@ -16,5 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('/user-update-components/{id}','userController@updateComponents')->name('user.updateComponents');
+
 Route::resource('/user','userController');
 Route::resource('/software', 'softwareController');
+Route::resource('/hardware', 'hardwareController');

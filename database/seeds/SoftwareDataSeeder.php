@@ -13,15 +13,15 @@ class SoftwareDataSeeder extends Seeder
     {
         //
         DB::table('software')->insert([
-            'name' => "Software A"
+            'name' => "Microsoft Word"
         ]);
 
         DB::table('software')->insert([
-            'name' => "Software B"
+            'name' => "Adobe Reader"
         ]);
 
         DB::table('software')->insert([
-            'name' => "Software C"
+            'name' => "Calculator"
         ]);
     }
 }

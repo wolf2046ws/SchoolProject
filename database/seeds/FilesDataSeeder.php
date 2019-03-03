@@ -13,15 +13,15 @@ class FilesDataSeeder extends Seeder
     {
         //
         DB::table('access_files')->insert([
-            'name' => "Access  FIle A"
+            'name' => "Receiption Image"
         ]);
 
         DB::table('access_files')->insert([
-            'name' => "Access  FIle B"
+            'name' => "Cars"
         ]);
-        
+
         DB::table('access_files')->insert([
-            'name' => "Access  FIle C"
+            'name' => "Design"
         ]);
     }
 }

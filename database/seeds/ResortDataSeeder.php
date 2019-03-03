@@ -13,7 +13,7 @@ class ResortDataSeeder extends Seeder
     {
         //
         DB::table('resorts')->insert([
-            'location_id' => "1",
+            'location_id' => "2",
             'company_id' => '1'
         ]);
 

@@ -8,6 +8,11 @@ class Hardware extends Model
 {
     //
     protected $fillable = [
-        'name'
+        'name', 'model', 'serial_number', 'asset_id'
     ];
+
+    public function users(){
+        return $this->belongsToMany(Hardware::class, 'requests', 'component_id')
+            ->where('component_type', 'Hardware');
+    }
 }
