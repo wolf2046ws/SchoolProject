@@ -3,6 +3,7 @@
 @section('css')
 
     <link rel="stylesheet" href="{{ asset('css/bootstrapdatatable.css')}}" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 @endsection
 
@@ -42,15 +43,17 @@
                     <th> {{ $user->contract_start }} </th>
                     <th> {{ $user->contract_end }} </th>
                     <th>
-                        <ul>
-                            <li ><a href="{{ route('user.edit', $user->id ) }}">Edit</a></li>
-                            <form method="POST" action="{{ route('user.destroy', $user->id) }}">
+                        <a href="{{ route('user.edit', $user->id ) }}"><i class="fas fa-user-edit  fa-1x"></i></a>
+
+                        <form method="POST" id="Form{{$user->id}}" action="{{ route('user.destroy', $user->id) }}" style="Display: inline;">
                                 @csrf
                                 {{ method_field('DELETE') }}
-                            <li ><button type="submit">
-                                Delete</button></li>
+                            <a href="javascript:{}" onclick='document.getElementById("Form{{$user->id}}").submit();'>
+                                <i class="fas fa-user-times fa-1x"></i>
+                            </a>
                         </form>
-                        </ul>
+                        <a href="{{ route('user.printPDF', $user->id)}}"><i class="fas fa-file-download"></i></a>
+
                     </th>
                 </tr>
             @endforeach

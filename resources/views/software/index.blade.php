@@ -21,6 +21,7 @@
                 <th>Name</th>
                 <th>Requests</th>
                 <th>Installed</th>
+                <th>Actions</th>
             </tr>
         </thead>
 

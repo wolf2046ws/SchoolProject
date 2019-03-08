@@ -11,7 +11,7 @@ use App\Hardware;
 use App\Software;
 use App\ComponentRequest;
 use App\AccessFile;
-
+use PDF;
 //use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\userDataValidation;
 
@@ -22,6 +22,12 @@ class userController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index()
     {
         //
@@ -149,6 +155,7 @@ class userController extends Controller
 
 
     public function add_user_component($request,$id){
+
         foreach ($request->softwares as $software => $value) {
             $component_request = new ComponentRequest();
             $component_request->user_id =  $id;
@@ -160,6 +167,7 @@ class userController extends Controller
         }
 
         foreach ($request->hardwares as $hardware => $value) {
+
             $component_request = new ComponentRequest();
             $component_request->user_id =  $id;
             $component_request->status = "pending" ;
@@ -183,18 +191,47 @@ class userController extends Controller
     }
 
     public function updateComponents(Request $request,$id){
-        //dd($request->all(),$id);
-        $components = ComponentRequest::whereIn('id',$request->components)->get();
-        foreach ($components as $component => $value) {
-            if($value->status == 'delevired'){
-                $value->status = 'pending';
+        $components = ComponentRequest::where('user_id',$id);
+        if($request->components){
+            $components = $components->where('component_type','!=','Hardware')
+            ->whereIn('id',$request->components)
+            ->get();
+            foreach ($components as $component => $value) {
+                if($value->status == 'delevired'){
+                    $value->status = 'pending';
+                }
+                else{
+                    $value->status = 'delevired';
+                }
+                $value->update();
             }
-            else{
-                $value->status = 'delevired';
-            }
-            $value->update();
         }
+        $components = $components->where('component_type','=','Hardware')
+        ->where('user_id',$id)
+        ->get();
+
+        for ($i=0; $i < count($request->assets_id) ; $i++) {
+                $value = $components[$i];
+                if($request->serial_number[$i] != null && $request->assets_id[$i] != null){
+                    $value->serial_number = $request->serial_number[$i];
+                    $value->assets_id = $request->assets_id[$i];
+                    $value->status = 'delevired';
+                }
+                else{
+                    $value->serial_number = null;
+                    $value->assets_id = null;
+                    $value->status = 'pending';
+                }
+                $value->update();
+        }
+
         session()->flash('success','User Compoenent Updated Successfully');
         return redirect()->back();
     }
+
+    public function printUserData($id){
+        $user = User::findOrFail($id);
+        $pdf = PDF::loadView('users.userPDF', compact('user'));
+        return $pdf->download("$user->first_name");
+        }
 }

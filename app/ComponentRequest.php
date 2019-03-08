@@ -10,7 +10,7 @@ class ComponentRequest extends Model
     protected $table = 'requests';
 
     protected $fillable = [
-        'user_id', 'component_id', 'component_type', 'status'
+        'user_id', 'component_id', 'component_type', 'status', 'serial_number', 'assets_id'
     ];
 
     public function file(){
