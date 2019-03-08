@@ -22,6 +22,7 @@
                 <th>Requests</th>
                 <th>Installed</th>
                 <th>Model</th>
+                <th>Actions</th>
             </tr>
         </thead>
 

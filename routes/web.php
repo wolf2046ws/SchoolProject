@@ -16,7 +16,12 @@ Route::get('/', function () {
 });
 
 Route::post('/user-update-components/{id}','userController@updateComponents')->name('user.updateComponents');
+Route::get('/user-print-data/{id}','userController@printUserData')->name('user.printPDF');
 
 Route::resource('/user','userController');
 Route::resource('/software', 'softwareController');
 Route::resource('/hardware', 'hardwareController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

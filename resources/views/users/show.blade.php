@@ -27,7 +27,8 @@
             <div class="form-check form-check-inline">
               <input class="form-check-input" name="components[]" type="checkbox"
               id="inlineCheckbox1" value="{{$software->id}}">
-              <label class="form-check-label" for="inlineCheckbox1" style="color: {{$software->status == 'delevired'? 'green' : 'red'}};">
+              <label class="form-check-label" for="inlineCheckbox1" style="color:
+              {{$software->status == 'delevired'? 'green' : 'red'}};">
                   {{$software->software->name}}</label>
             </div>
             <br>
@@ -61,13 +62,17 @@
                 <br>
                 @foreach($user->hardwares as $hardware)
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="components[]" type="checkbox" id="inlineCheckbox1"
-                 value="{{$hardware->id}}">
                   <label class="form-check-label" for="inlineCheckbox1"
                   style="color: {{$hardware->status == 'delevired'? 'green' : 'red'}};width:100%;">
                       {{$hardware->hardware->name}}</label>
-                    <input type="text" name="assetsNumber[]" class="form-control" style="margin-left:50px; margin-right: 24px;" placeholder="Assets Id">
-                    <input type="text" name="serialNumber[]" class="form-control" placeholder="Serial ID">
+
+                    <input type="text" name="assets_id[]"
+                    class="form-control"
+                    style="margin-left:50px; margin-right: 24px;"
+                    value="{{$hardware->assets_id}}"
+                    placeholder="Assets Id">
+
+                    <input type="text" value="{{$hardware->serial_number}}" name="serial_number[]" class="form-control" placeholder="Serial ID">
                     <br><br>
                 </div>
                 <br>
