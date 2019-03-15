@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Http\Request;
+use Psy\TabCompletion\Matcher\AbstractDefaultParametersMatcher;
 
 class HomeController extends Controller
 {
@@ -29,14 +30,15 @@ class HomeController extends Controller
             Adldap::connect();
         } catch (\Exception $e) {
             // Can't connect.
-dd($e->getMessage());
-            // By default, the timeout for connectivity is 5 seconds. A user
-            // will have to wait this length of time if there is issues
-            // connecting to your AD server. You can configure
-            // this in your `config/adldap.php` file.
+            dd($e->getMessage());
         }
-        $user = Adldap::getDefaultProvider();
+        $user = Adldap::search()->users()->get();
+
         dd($user);
+
+        dd(Adldap::auth()->attempt("uid=gauss,dc=example,dc=com", "password", $bindAsUser = true));
+        $user = Adldap::getDefaultProvider();
+        dd(Adldap::auth()->attempt('euler', 'password'));
         $conn_settings = config('adldap.connections')[config('adldap_auth.connection')]['connection_settings'];
         $credentials = $request->only(config('adldap_auth.usernames.eloquent'), 'password');
         $credentials['password'] = 'password';
