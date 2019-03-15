@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Adldap\Laravel\AdldapServiceProvider::class,
+        Adldap\Laravel\AdldapAuthServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

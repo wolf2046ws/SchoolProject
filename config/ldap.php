@@ -199,7 +199,8 @@ return [
                 |
                 */
 
-                'follow_referrals' => false,
+//                'follow_referrals' => false,
+                'follow_referrals' => true,
 
                 /*
                 |--------------------------------------------------------------------------

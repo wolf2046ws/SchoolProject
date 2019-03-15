@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
+
 
 Route::post('/user-update-components/{id}','userController@updateComponents')->name('user.updateComponents');
 Route::get('/user-print-data/{id}','userController@printUserData')->name('user.printPDF');
