@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Http\Request;
 use Psy\TabCompletion\Matcher\AbstractDefaultParametersMatcher;
@@ -30,13 +31,23 @@ class HomeController extends Controller
             Adldap::connect();
         } catch (\Exception $e) {
             // Can't connect.
-            dd($e->getMessage());
+            dd($e->getMessage() . "Hello");
         }
-        $user = Adldap::search()->users()->get();
 
-        dd($user);
+        /**********************/
 
-        dd(Adldap::auth()->attempt("uid=gauss,dc=example,dc=com", "password", $bindAsUser = true));
+        // Working +++++++++******
+        //$dn = 'cn=mohammad abdulkarim,cn=users,dc=regenbogen,dc=ag';
+        //$user = Adldap::search()->read()->in($dn)->whereHas('objectclass')->first();
+        //$user = Adldap::search()->findByDn($dn);
+
+        dd(Adldap::search()->users()->find('ahmed max'));
+
+
+        dd(Adldap::auth()->attempt("uid=max auto,CN=managerGroup,ou=manager,ou=10 Kiel,DC=regenbogen,DC=ag", "Abdullah89", $bindAsUser = true));
+
+        //users=
+        //getgroup
         $user = Adldap::getDefaultProvider();
         dd(Adldap::auth()->attempt('euler', 'password'));
         $conn_settings = config('adldap.connections')[config('adldap_auth.connection')]['connection_settings'];

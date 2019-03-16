@@ -84,8 +84,9 @@ return [
                 | Custom schema classes must implement Adldap\Schemas\SchemaInterface
                 |
                 */
+                'schema' => Adldap\Schemas\ActiveDirectory::class,
 
-                'schema' => Adldap\Schemas\OpenLDAP::class,
+                    //'schema' => Adldap\Schemas\OpenLDAP::class,
 
                 /*
                 |--------------------------------------------------------------------------
@@ -111,7 +112,7 @@ return [
                 |
                 */
 
-                'account_suffix' => env('LDAP_ACCOUNT_SUFFIX', ''),
+                'account_suffix' => env('LDAP_ACCOUNT_SUFFIX', '@regenbogen.ag'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -127,7 +128,7 @@ return [
                 |
                 */
 
-                'hosts' => explode(' ', env('LDAP_HOSTS', 'corp-dc1.corp.acme.org corp-dc2.corp.acme.org')),
+                'hosts' => explode(' ', env('LDAP_HOSTS', '192.168.0.9')),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -167,9 +168,10 @@ return [
                 |
                 */
 
-                'base_dn' => env('LDAP_BASE_DN', 'dc=corp,dc=acme,dc=org'),
+                'base_dn' => env('LDAP_BASE_DN', 'dc=regenbogen,dc=ag'),
 
                 /*
+                cn=mohammad abdulkarim,cn=users,dc=regenbogen,dc=ag
                 |--------------------------------------------------------------------------
                 | LDAP Username & Password
                 |--------------------------------------------------------------------------
@@ -182,8 +184,8 @@ return [
                 |
                 */
 
-                'username' => env('LDAP_USERNAME'),
-                'password' => env('LDAP_PASSWORD'),
+                'username' => env('LDAP_USERNAME', 'mohammad abdulkarim'),
+                'password' => env('LDAP_PASSWORD', 'Abdullah89'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -210,8 +212,8 @@ return [
                 | If you need to be able to change user passwords on your server, then an
                 | SSL or TLS connection is required. All other operations are allowed
                 | on unsecured protocols.
-                | 
-                | One of these options are definitely recommended if you 
+                |
+                | One of these options are definitely recommended if you
                 | have the ability to connect to your server securely.
                 |
                 */
