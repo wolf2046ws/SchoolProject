@@ -41,7 +41,7 @@ class HomeController extends Controller
         //$user = Adldap::search()->read()->in($dn)->whereHas('objectclass')->first();
         //$user = Adldap::search()->findByDn($dn);
 
-        dd(Adldap::search()->users()->find('ahmed max'));
+        dd(Adldap::search()->users()->find('mohammad abdulkarim'));
 
 
         dd(Adldap::auth()->attempt("uid=max auto,CN=managerGroup,ou=manager,ou=10 Kiel,DC=regenbogen,DC=ag", "Abdullah89", $bindAsUser = true));
