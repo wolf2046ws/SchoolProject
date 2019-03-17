@@ -9,9 +9,13 @@ use App\Company;
 use App\Resort;
 use App\Hardware;
 use App\Software;
+use APP\Location;
 use App\ComponentRequest;
 use App\AccessFile;
+use App\helperClass;
 use PDF;
+use Adldap\Laravel\Facades\Adldap;
+
 //use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\userDataValidation;
 
@@ -23,15 +27,75 @@ class userController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
+     /*public function __construct()
      {
          $this->middleware('auth');
-     }
+     }*/
 
     public function index()
     {
         //
-        $users = User::latest()->get();
+        helperClass::LDAPConnect();
+        $users = User::latest();
+        if(false){
+            $users = $users->get();
+        }
+        else{
+
+            //$user = Adldap::search()->ous()->find('10 Kiel');
+
+            //$user = Adldap::search()->ous()->get();
+
+            //$user = Adldap::search()->users()->findBy('samaccountname', 'mxas');
+
+            //dd($user);
+
+            //$dn = 'cn=mohammad abdulkarim,cn=users,dc=regenbogen,dc=ag';
+
+            //$user = Adldap::search()->read()->in($dn)->whereHas('objectclass')->first();
+
+            /*
+            echo "<pre>";
+            echo $ou[6]->distinguishedname[0];
+            echo "</pre>";*/
+
+            $user2 = Adldap::search()->ous()->find('10 Kiel');
+
+
+
+            $ou = Adldap::search()->ous()->get();
+            echo "<pre>";
+            for ($i=0; $i < count($ou); $i++) {
+                echo $ou[$i]->distinguishedname[0];
+                echo "<br>";
+            }
+            echo "</pre>";
+
+            dd("Hello");
+
+            $members = Adldap::search()->in($ou)->get();
+
+            dd($members);
+
+            for ($i=0; $i < count($user); $i++) {
+                // code...
+                var_dump($user[$i]->distinguishedname);
+                echo "<br>";
+            }
+
+
+
+            dd("Hello");
+            //helperClass::getUserOU($user); //->location->name
+            //find resourt id eli location id bta3o = location da
+            //get all usres eli elresurt id bta3hom = $resort -id
+            //handel null
+            dd(collect(\json_decode($user[0]->distinguishedname[0],true)));
+            $location = Location::where('name','=',$user[0]->cn)->get();
+
+            //$resort =
+            //$users = $users->where('')
+        }
         return view('users.index', compact('users'));
     }
 

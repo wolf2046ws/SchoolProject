@@ -31,18 +31,16 @@ class HomeController extends Controller
             Adldap::connect();
         } catch (\Exception $e) {
             // Can't connect.
-            dd($e->getMessage() . "Hello");
+            dd($e->getMessage());
         }
 
         /**********************/
 
-        // Working +++++++++******
-        //$dn = 'cn=mohammad abdulkarim,cn=users,dc=regenbogen,dc=ag';
-        //$user = Adldap::search()->read()->in($dn)->whereHas('objectclass')->first();
-        //$user = Adldap::search()->findByDn($dn);
+        // 1. To Get All User in server
+        // Adldap::search()->users()->get()
 
-        dd(Adldap::search()->users()->find('mohammad abdulkarim'));
-
+        // 2. To Auth , use the small name => moab ,not the long name =>Mohammad Abdulkarim
+        dd(Adldap::auth()->attempt("ahma", "Abdullah89"));
 
         dd(Adldap::auth()->attempt("uid=max auto,CN=managerGroup,ou=manager,ou=10 Kiel,DC=regenbogen,DC=ag", "Abdullah89", $bindAsUser = true));
 
